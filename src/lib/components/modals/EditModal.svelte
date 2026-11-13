@@ -17,11 +17,28 @@
         }),
     );
 
+    let error: string[] = $state([]);
+
     function handleSubmit() {
         if (!uiStore.serviceToEdit || !service) return;
+        if (editedData) {
+            if ((editedData.name || editedData.name == '') && editedData.name.trim().length <= 2)
+                error.push("nameError");
+            if (editedData.url && editedData.url.trim().length < 7)
+                error.push("urlError");
+            if (
+                editedData.url && editedData.url !== service.url &&
+                serviceStore.serviceList
+                    .map((s) => s.url === editedData.url!.trim())
+                    .includes(true)
+            )
+                error.push("alreadyExist");
+            if (error.length) return;
+        }
+
         serviceStore.editService({
             ...service,
-            ...editedData
+            ...editedData,
         });
         closeModal();
     }
@@ -65,11 +82,10 @@
                         maxlength="64"
                         bind:value={editedData.name}
                     />
-                    <p class="field_error" style="display: none;">
-                        Введите название
-                    </p>
                 </div>
-
+                <p class="field_error" hidden={!error.includes("nameError")}>
+                    Название слишком короткое
+                </p>
                 <div class="field">
                     <label class="field_label" for="f-url">URL</label>
                     <input
@@ -79,6 +95,12 @@
                         bind:value={editedData.url}
                     />
                 </div>
+                <p class="field_error" hidden={!error.includes("urlError")}>
+                    Некорректный URL
+                </p>
+                <p class="field_error" hidden={!error.includes("alreadyExist")}>
+                    Сервис с таким URL уже существует.
+                </p>
 
                 <div class="field-row">
                     <div class="field">
