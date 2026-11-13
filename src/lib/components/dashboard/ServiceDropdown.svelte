@@ -23,7 +23,7 @@
     >
         <span class="dropdown_icon">✏️</span> Edit
     </button>
-    <button class="dropdown_item" role="menuitem">
+    <button onclick={() => serviceStore.pauseService(service.id)} class="dropdown_item" role="menuitem">
         <span class="dropdown_icon">{service.enabled ? "⏸️" : "▶️"}</span>
         {service.enabled ? "Pause" : "Start"}
     </button>

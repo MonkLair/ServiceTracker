@@ -42,7 +42,6 @@
         e.preventDefault();
         isOpen = false;
     };
-    
 </script>
 
 <section class="dashboard" data-route="dashboard">
@@ -67,7 +66,7 @@
 
     <div class="toolbar">
         <div class="toolbar_row">
-            <AddServiceButton onclick={() => isOpen = true}/>
+            <AddServiceButton onclick={() => (isOpen = true)} />
 
             <input
                 class="input input_search"
@@ -142,14 +141,25 @@
                 Добавь первый сервис или загрузи демо-набор из 15 сервисов.
             </p>
             <div class="empty-state_actions">
-                <AddServiceButton onclick={() => isOpen = true}/>
-                <button onclick={() => {
-                    setFakeData()
-                    serviceStore.loadServices()
-                }} class="btn btn_ghost" type="button"
-                    >Load demo set</button
+                <AddServiceButton onclick={() => (isOpen = true)} />
+                <button
+                    onclick={() => {
+                        setFakeData();
+                        serviceStore.loadServices();
+                    }}
+                    class="btn btn_ghost"
+                    type="button">Load demo set</button
                 >
             </div>
+        </div>
+    {/if}
+    {#if serviceList.length && !filteredList.length}
+        <div class="empty-state">
+            <div class="empty-state_icon">📈</div>
+            <h2 class="empty-state_title">Сервисы не найдены</h2>
+            <p class="empty-state_text">
+                Добавьте новый или измените фильтры.
+            </p>
         </div>
     {/if}
 </section>

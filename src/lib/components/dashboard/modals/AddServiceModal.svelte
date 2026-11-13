@@ -6,7 +6,7 @@
     let { closeModal } = $props();
     const newServiceData: Omit<ShortService, "id"> = $state({
         intervalSec: settingsStore.settings.defaultInterval,
-        expectedStatus: 200,
+        expectedStatus: settingsStore.settings.defaultStatus,
         enabled: true,
         name: "",
         url: "",
@@ -17,8 +17,14 @@
     async function handleSubmit(e: MouseEvent) {
         if (newServiceData.name.trim().length <= 2) error.push("nameError");
         if (newServiceData.url.trim().length < 7) error.push("urlError");
+        if (
+            serviceStore.serviceList.map(
+                (s) => s.url === newServiceData.url.trim(),
+            ).length
+        )
+            error.push("alreadyExist");
         if (error.length) return;
-        
+
         closeModal(e);
 
         await serviceStore.addService(newServiceData);
@@ -69,6 +75,9 @@
                 />
                 <p class="field_error" hidden={!error.includes("urlError")}>
                     Некорректный URL
+                </p>
+                <p class="field_error" hidden={!error.includes("alreadyExist")}>
+                    Сервис с таким URL уже существует.
                 </p>
             </div>
 

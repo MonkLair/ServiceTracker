@@ -1,7 +1,6 @@
-import type { Service } from "#lib/models/Service.ts"
-
+import { SETTINGS_KEY } from "#lib/config/consts.ts"
 
 export async function getFromStorage<T>(key: string) {
-    const data: T = JSON.parse(localStorage.getItem(key)!)
+    const data: T = JSON.parse(localStorage.getItem(key) || '{}')    
     return structuredClone(data)
 }

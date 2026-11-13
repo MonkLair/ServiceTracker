@@ -9,5 +9,6 @@ export const SETTINGS_KEY = 'settings_services'
 export const DEFAULT_SETTINGS: Settings = {
     defaultInterval: 60,
     degradedBoundary: 1000,
-    theme: 'dark'
+    theme: 'dark',
+    defaultStatus: 200
 }

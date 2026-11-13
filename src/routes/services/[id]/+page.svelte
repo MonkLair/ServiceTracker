@@ -1,15 +1,13 @@
 <script lang="ts">
-    import ConfirmClearModal from "#lib/components/modals/ConfirmClearModal.svelte";
-    import ConfirmDeleteModal from "#lib/components/modals/ConfirmDeleteModal.svelte";
-    import ConfirmModal from "#lib/components/modals/ConfirmModal.svelte";
+    import ResponseChart from "#lib/components/settings/ResponseChart.svelte";
     import Spinner from "#lib/components/Spinner.svelte";
     import type { Service } from "#lib/models/Service.ts";
     import { serviceStore } from "#lib/stores/ServiceStore.svelte.ts";
     import { uiStore } from "#lib/stores/UIStore.svelte.ts";
     import { firstLetterToUpperCase } from "#lib/utils/firstLetterToUpperCase.ts";
+    import { formatDate } from "#lib/utils/formatDate.ts";
     import { getAvg } from "#lib/utils/getAvg.ts";
     import { getUptime } from "#lib/utils/getUptime.ts";
-    import { goto } from "$app/navigation";
     import { page } from "$app/state";
 
     const service: Service | undefined = $derived(
@@ -93,7 +91,7 @@
 
         <p class="detail_meta">
             Interval: {service.intervalSec}s · Expected: {service.expectedStatus}
-            · Created: {service.createdAt} · Updated: {service.updatedAt}
+            · Created: {formatDate(service.createdAt)} · Updated: {formatDate(service.updatedAt)}
             · Checks: {service.checks.length}
         </p>
 
@@ -130,7 +128,7 @@
             </div>
         </div>
 
-        <div class="chart">
+        <!-- <div class="chart">
             <div class="chart_head">
                 <h2 class="chart_title">
                     Response time (last {service.checks.length} checks)
@@ -181,8 +179,15 @@
                     />
                 </svg>
             </div>
-        </div>
+        </div> -->
 
+        {#if service.checks.length}
+            <ResponseChart checks={service.checks} />
+        {:else}
+            <div style="display: flex; justify-content: center; padding-bottom: 20px;">
+                <h2 class="empty-state_title">Checks not found</h2>
+            </div>
+        {/if}
         <div class="history">
             <div class="history_head">
                 <h2 class="history_title">History</h2>
@@ -209,10 +214,10 @@
                         </tr>
                     {:else}
                         {#each service.checks.slice(0, 50) as check}
-                            {const date = new Date(check.ts)}
+                            {@const date = new Date(check.ts).toISOString()}
                             <tr>
-                                <td title={date.toISOString()}
-                                    >{date.toISOString()}</td
+                                <td title={formatDate(date)}
+                                    >{formatDate(date)}</td
                                 >
                                 <td
                                     ><span class="badge badge_{check.status}"

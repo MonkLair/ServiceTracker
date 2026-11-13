@@ -7,18 +7,44 @@
     import ConfirmClearModal from "#lib/components/modals/ConfirmClearModal.svelte";
     import ConfirmDeleteModal from "#lib/components/modals/ConfirmDeleteModal.svelte";
     import EditModal from "#lib/components/modals/EditModal.svelte";
+    import { settingsStore } from "#lib/stores/SettingsStore.svelte.ts";
     let { children }: LayoutProps = $props();
 
     const isAllPaused = $derived(
         serviceStore.serviceList.find((s) => s.enabled) ? false : true,
     );
+
+    $effect(() => {
+        const timers = new Map<string, ReturnType<typeof setInterval>>()
+
+        for (const service of serviceStore.serviceList) {
+            if (!service.enabled) continue
+
+            const id = setInterval(() => {
+                serviceStore.oncePingService(service)
+            }, service.intervalSec * 1000)
+
+            timers.set(service.id, id)
+        }
+
+        return () => {
+            for (const id of timers.values()) {
+                clearInterval(id)
+            }
+        }
+    })
+    const theme = $derived(
+        settingsStore.settings.theme === 'system'
+            ? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            : settingsStore.settings.theme
+    )
 </script>
 
 <header class="app_header">
     <div class="app_header_inner container">
         <a class="logo" href="/">
             <span class="logo_dot"></span>
-            <span class="logo_text">Pulse</span>
+            <span class="logo_text">Service Tracker</span>
         </a>
 
         <nav class="nav" aria-label="Основная навигация">
@@ -50,8 +76,19 @@
                 class="icon-btn"
                 type="button"
                 id="toggle-theme"
-                aria-label="Сменить тему">🌙</button
-            >
+                onclick={() => {
+                    theme === 'dark'
+                        ? settingsStore.toggleTheme('light')
+                        : settingsStore.toggleTheme('dark')
+                }}
+                aria-label="Сменить тему">
+                    {#if theme != 'dark'}
+                        🌙
+                    {:else}
+                        ☀️
+                    {/if}
+                </button
+            >   
         </div>
     </div>
 </header>

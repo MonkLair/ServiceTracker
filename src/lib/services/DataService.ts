@@ -103,7 +103,10 @@ export class DataService {
 
         const idx = newList.findIndex(s => s.id === editedService.id)
 
-        newList[idx] = editedService
+        newList[idx] = {
+            ...editedService,
+            updatedAt: new Date().toISOString()
+        }
         localStorage.setItem(SEED_KEY, JSON.stringify(newList))
         return newList
     }

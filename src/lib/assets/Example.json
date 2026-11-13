@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "exportedAt": "2026-11-14T12:00:00.000Z",
+  "services": [
+    {
+      "id": "svc-01",
+      "name": "Main API",
+      "url": "https://api.example.com/health",
+      "intervalSec": 30,
+      "expectedStatus": 200,
+      "enabled": true,
+      "createdAt": "2026-10-01T09:00:00.000Z",
+      "updatedAt": "2026-10-01T09:00:00.000Z",
+      "checks": [
+        {
+          "id": "chk-01",
+          "httpStatus": 200,
+          "responseMs": 120,
+          "status": "up",
+          "ts": 1763121600000
+        },
+        {
+          "id": "chk-02",
+          "httpStatus": 200,
+          "responseMs": 145,
+          "status": "up",
+          "ts": 1763121630000
+        }
+      ]
+    },
+    {
+      "id": "svc-02",
+      "name": "Auth Service",
+      "url": "https://auth.example.com/ping",
+      "intervalSec": 60,
+      "expectedStatus": 200,
+      "enabled": true,
+      "createdAt": "2026-10-01T09:01:00.000Z",
+      "updatedAt": "2026-10-02T10:15:00.000Z",
+      "checks": [
+        {
+          "id": "chk-03",
+          "httpStatus": 200,
+          "responseMs": 1500,
+          "status": "degraded",
+          "ts": 1763121660000
+        },
+        {
+          "id": "chk-04",
+          "httpStatus": null,
+          "responseMs": null,
+          "status": "down",
+          "error": "ECONNREFUSED",
+          "ts": 1763121720000
+        }
+      ]
+    },
+    {
+      "id": "svc-03",
+      "name": "Legacy Billing",
+      "url": "https://legacy-billing.example.com/status",
+      "intervalSec": 300,
+      "expectedStatus": 200,
+      "enabled": false,
+      "createdAt": "2026-10-01T09:02:00.000Z",
+      "updatedAt": "2026-10-05T14:30:00.000Z",
+      "checks": []
+    }
+  ],
+  "settings": {
+    "theme": "dark",
+    "defaultInterval": 60,
+    "degradedBoundary": 1500,
+    "defaultStatus": 404
+  }
+}
