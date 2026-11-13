@@ -17,6 +17,7 @@ class ServiceStore {
     }
 
     async oncePingService(service: Service) {
+        if(service.checks.length == 50) return
         if (this.pingindIds.has(service.id)) return
         this.pingindIds.add(service.id)
         
