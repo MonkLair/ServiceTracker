@@ -17,12 +17,7 @@
     async function handleSubmit(e: MouseEvent) {
         if (newServiceData.name.trim().length <= 2) error.push("nameError");
         if (newServiceData.url.trim().length < 7) error.push("urlError");
-        if (
-            serviceStore.serviceList.map(
-                (s) => s.url === newServiceData.url.trim(),
-            ).length
-        )
-            error.push("alreadyExist");
+        if (serviceStore.serviceList.map((s) => s.url === newServiceData.url.trim(),).includes(true)) error.push("alreadyExist");
         if (error.length) return;
 
         closeModal(e);
