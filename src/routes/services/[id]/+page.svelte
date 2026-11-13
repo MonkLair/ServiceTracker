@@ -128,59 +128,6 @@
             </div>
         </div>
 
-        <!-- <div class="chart">
-            <div class="chart_head">
-                <h2 class="chart_title">
-                    Response time (last {service.checks.length} checks)
-                </h2>
-            </div>
-            <div class="chart_canvas">
-                <svg
-                    viewBox="0 0 800 220"
-                    preserveAspectRatio="none"
-                    class="chart_svg"
-                    role="img"
-                    aria-label="График времени ответа"
-                >
-                    <line
-                        x1="0"
-                        y1="60"
-                        x2="800"
-                        y2="60"
-                        class="chart_threshold"
-                    />
-                    <polyline
-                        class="chart_line"
-                        points="0,170 40,160 80,150 120,180 160,120 200,130 240,90 280,110 320,140 360,100 400,80 440,150 480,130 520,120 560,140 600,100 640,90 680,110 720,130 760,120 800,110"
-                    />
-                    <circle
-                        cx="0"
-                        cy="170"
-                        r="3"
-                        class="chart_dot chart_dot--up"
-                    />
-                    <circle
-                        cx="160"
-                        cy="120"
-                        r="3"
-                        class="chart_dot chart_dot--up"
-                    />
-                    <circle
-                        cx="240"
-                        cy="90"
-                        r="3"
-                        class="chart_dot chart_dot--degraded"
-                    />
-                    <circle
-                        cx="440"
-                        cy="150"
-                        r="3"
-                        class="chart_dot chart_dot--degraded"
-                    />
-                </svg>
-            </div>
-        </div> -->
-
         {#if service.checks.length}
             <ResponseChart checks={service.checks} />
         {:else}

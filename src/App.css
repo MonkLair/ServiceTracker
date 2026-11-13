@@ -56,9 +56,6 @@ body {
     --shadow-lg: 0 10px 30px rgba(0, 0, 0, .5);
 }
 
-/* ====================================================
-   Layout
-   ==================================================== */
 .container {
     max-width: 1280px;
     margin: 0 auto;
@@ -69,9 +66,6 @@ body {
     padding: 32px 24px;
 }
 
-/* ====================================================
-   Header
-   ==================================================== */
 .app_header {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
@@ -150,9 +144,6 @@ body {
     gap: 12px;
 }
 
-/* ====================================================
-   Buttons
-   ==================================================== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -232,9 +223,6 @@ body {
     color: var(--text);
 }
 
-/* ====================================================
-   Forms
-   ==================================================== */
 .input,
 .select {
     width: 100%;
@@ -319,9 +307,6 @@ body {
     accent-color: var(--accent);
 }
 
-/* ====================================================
-   Summary tiles
-   ==================================================== */
 .summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -364,9 +349,6 @@ body {
     color: var(--down);
 }
 
-/* ====================================================
-   Toolbar + chips
-   ==================================================== */
 .toolbar {
     margin-bottom: 20px;
     display: flex;
@@ -410,9 +392,6 @@ body {
     color: #fff;
 }
 
-/* ====================================================
-   Cards grid
-   ==================================================== */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -490,9 +469,6 @@ body {
     font-weight: 600;
 }
 
-/* ====================================================
-   Badges
-   ==================================================== */
 .badge {
     display: inline-flex;
     align-items: center;
@@ -535,9 +511,6 @@ body {
     color: var(--unknown);
 }
 
-/* ====================================================
-   Sparkline
-   ==================================================== */
 .sparkline {
     display: flex;
     align-items: flex-end;
@@ -572,9 +545,6 @@ body {
     background: var(--down);
 }
 
-/* ======================_============================
-   Empty state
-   ==================================================== */
 .empty-state {
     text-align: center;
     padding: 64px 24px;
@@ -605,9 +575,6 @@ body {
     flex-wrap: wrap;
 }
 
-/* ====================================================
-   Detail page
-   ==================================================== */
 .breadcrumbs {
     display: flex;
     gap: 8px;
@@ -689,7 +656,6 @@ body {
     font-weight: 700;
 }
 
-/* Chart */
 .chart {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -744,7 +710,6 @@ body {
     fill: var(--down);
 }
 
-/* History */
 .history {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -795,9 +760,6 @@ body {
     font-size: 13px;
 }
 
-/* ====================================================
-   Settings
-   ==================================================== */
 .settings {
     max-width: 720px;
 }
@@ -834,9 +796,6 @@ body {
     gap: 8px;
 }
 
-/* ====================================================
-   Modal
-   ==================================================== */
 .modal {
     position: fixed;
     inset: 0;
@@ -908,9 +867,6 @@ body {
     margin-top: 8px;
 }
 
-/* ====================================================
-   Toasts
-   ==================================================== */
 .toast-stack {
     position: fixed;
     bottom: 24px;
@@ -954,9 +910,6 @@ body {
     }
 }
 
-/* ====================================================
-   Responsive
-   ==================================================== */
 @media (max-width: 640px) {
     .app-header_inner {
         height: auto;
@@ -1005,7 +958,6 @@ body {
     }
 }
 
-/* === Кнопка-триггер (⋮) === */
 .card_menu {
     display: inline-flex;
     align-items: center;
@@ -1019,7 +971,6 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background 0.15s, color 0.15s;
-    /* Важно: relative, чтобы меню позиционировалось относительно карточки */
     position: relative;
     z-index: 10;
 }
@@ -1029,22 +980,17 @@ body {
     color: var(--text);
 }
 
-/* === Прозрачный фон (чтобы закрывать меню) === */
 .dropdown_backdrop {
     position: fixed;
     inset: 0;
     z-index: 40;
-    /* Фон прозрачный, но перехватывает клики */
     background: transparent;
 }
 
-/* === Само меню === */
 .dropdown_menu {
     position: absolute;
     top: 40px;
-    /* Чуть ниже кнопки */
     right: 16px;
-    /* Прижато к правому краю карточки */
     z-index: 50;
     min-width: 180px;
     background: var(--surface);
@@ -1053,7 +999,6 @@ body {
     box-shadow: var(--shadow-lg);
     padding: 6px;
 
-    /* Анимация появления */
     animation: dropdown-in 0.15s ease;
     transform-origin: top right;
 }
@@ -1070,7 +1015,6 @@ body {
     }
 }
 
-/* === Пункты меню === */
 .dropdown_item {
     display: flex;
     align-items: center;
@@ -1101,14 +1045,12 @@ body {
     width: 16px;
 }
 
-/* === Разделитель === */
 .dropdown_divider {
     height: 1px;
     background: var(--border);
     margin: 6px 0;
 }
 
-/* === Опасный пункт (Удалить) === */
 .dropdown_item_danger {
     color: var(--down);
 }
@@ -1117,22 +1059,15 @@ body {
     background: rgba(239, 68, 68, 0.1);
 }
 
-/* === Анимация для бейджа "Paused" (если нужно) === */
 .badge_unknown {
     background: var(--surface-2);
     color: var(--unknown);
 }
 
-/* ====================================================
-   Danger Confirm Modal Specifics
-   ==================================================== */
-
-/* Красный цвет для заголовка опасного действия */
 .modal_title_danger {
     color: var(--down);
 }
 
-/* Стили для текста внутри модалки */
 .modal_text {
     margin-top: 0;
     margin-bottom: 16px;
@@ -1140,7 +1075,6 @@ body {
     line-height: 1.5;
 }
 
-/* Выделяем само слово RESET, чтобы пользователь его точно заметил */
 .modal_text strong {
     color: var(--text);
     font-weight: 600;

@@ -3,7 +3,6 @@ import { BackupService } from "#lib/services/BackupService.ts";
 import { DataService } from "#lib/services/DataService.ts";
 import { settingsStore } from "./SettingsStore.svelte";
 
-
 class ServiceStore {
     serviceList: Service[] = $state([])
     pingindIds = $state(new Set<string>())
@@ -11,25 +10,11 @@ class ServiceStore {
     async addService(service: Omit<ShortService, 'id'>) {
         if (this.serviceList.length == 100) return
         this.serviceList = await DataService.addService(service) ?? this.serviceList
-        // const newService = this.serviceList.find(s => s.url === service.url)
-        // console.log(newService);
-        
-        // if (newService) await this.pingService(newService)
     }
 
     async loadServices() {
         this.serviceList = await DataService.fetchAllServices()
     }
-
-    // async pingService(service: Service) {
-    //     let list: Service[] = []
-
-    //     for (let i = 0; i < 20; i++) {
-    //         list = await DataService.pingService(service.url, service.id, settingsStore.settings.degradedBoundary)
-    //     }
-
-    //     return list
-    // }
 
     async oncePingService(service: Service) {
         if (this.pingindIds.has(service.id)) return

@@ -3,9 +3,6 @@ import type { IntervalSec } from "#lib/models/Service.ts";
 import type { Settings, Themes } from "#lib/models/Settings.ts";
 import { getFromStorage } from "#lib/utils/getFromStorage.ts";
 
-
-
-
 export class SettingsService {
 
     static async loadSettings() {

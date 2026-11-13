@@ -3,8 +3,6 @@ import type { IntervalSec } from "#lib/models/Service.ts";
 import type { Settings, Themes } from "#lib/models/Settings.ts";
 import { SettingsService } from "#lib/services/SettingsService.ts";
 
-
-
 class SettingsStore {
     settings: Settings = $state({ ...DEFAULT_SETTINGS })
 

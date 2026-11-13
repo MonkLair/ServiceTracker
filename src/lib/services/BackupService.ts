@@ -3,7 +3,6 @@ import type { Service } from "#lib/models/Service.ts";
 import type { Settings } from "#lib/models/Settings.ts";
 import { getFromStorage } from "#lib/utils/getFromStorage.ts";
 
-
 interface Import {
     settings: Settings
     services: Service[]

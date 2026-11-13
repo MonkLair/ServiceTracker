@@ -1,6 +1,5 @@
 import type { Service } from "#lib/models/Service.ts";
 
-
 class UIStore {
     serviceToDelete: Service | null = $state(null)
     serviceToClearHistory: Service | null = $state(null)

@@ -5,7 +5,6 @@
     import type { Filters, Sorts } from "#lib/models/ServicesFilters.ts";
     import { setFakeData } from "#lib/seed/seed.ts";
     import { serviceStore } from "#lib/stores/ServiceStore.svelte.ts";
-    import { settingsStore } from "#lib/stores/SettingsStore.svelte.ts";
     import { filterServices } from "#lib/utils/filterServices.ts";
 
     const serviceList = $derived(serviceStore.serviceList);

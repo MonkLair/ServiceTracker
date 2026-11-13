@@ -1,6 +1,5 @@
 import type { Check } from "#lib/models/Check.ts";
 
-
 export function getChart(checks: Check[], width: number, height: number) {
     if (!checks.length) return { points: '', maxMs: 0 }
 

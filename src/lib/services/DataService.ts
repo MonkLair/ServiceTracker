@@ -1,17 +1,13 @@
 import { SEED_KEY } from "#lib/config/consts.ts"
-import type { Check, ServiceStatus } from "#lib/models/Check.ts"
+import type { ServiceStatus } from "#lib/models/Check.ts"
 import type { Service, ShortService } from "#lib/models/Service.ts"
-import { settingsStore } from "#lib/stores/SettingsStore.svelte.ts"
 import { delay } from "#lib/utils/delay.ts"
 import { getFromStorage} from "#lib/utils/getFromStorage.ts"
-
-
 
 export class DataService {
     static async fetchAllServices(): Promise<Service[]> {
         return JSON.parse(localStorage.getItem(SEED_KEY)!)
     }
-
 
     static async toggleAllEnabled(enabled: boolean) {
         const newList = await getFromStorage<Service[]>(SEED_KEY)

@@ -1,6 +1,5 @@
 import type { Check } from "#lib/models/Check.ts";
 
-
 export function makeFakeHistory(n = 20): Check[] {
     let history: Check[] = []
     for (let i = 0; i <= n; i++) {
