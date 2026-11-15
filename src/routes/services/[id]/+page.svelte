@@ -160,7 +160,7 @@
                             <td>Checks not found</td>
                         </tr>
                     {:else}
-                        {#each service.checks.slice(0, 50) as check}
+                        {#each service.checks.slice(0, 50) as check (check.id)}
                             {@const date = new Date(check.ts).toISOString()}
                             <tr>
                                 <td title={formatDate(date)}

@@ -123,7 +123,7 @@
     </div>
 
     <div class="cards">
-        {#each filteredList as service}
+        {#each filteredList as service (service.id)}
             <ServiceCard {service} />
         {/each}
     </div>

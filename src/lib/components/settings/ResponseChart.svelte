@@ -30,7 +30,7 @@
             points={chart.points}
         />
 
-        {#each checks as check, i}
+        {#each checks as check, i (check.id)}
             {@const x =
                 10 + (i / Math.max(1, checks.length - 1)) * (width - 20)}
             {@const y =

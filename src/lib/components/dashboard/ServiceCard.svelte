@@ -58,7 +58,7 @@
         aria-hidden="true"
     >
         {#if enabled}
-            {#each checks.slice(-20) as check}
+            {#each checks.slice(-20) as check (check.id)}
                 <span
                     class="sparkline_bar sparkline_bar_{check.status}"
                     style="height:{Math.round(
