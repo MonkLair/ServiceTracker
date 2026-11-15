@@ -73,6 +73,7 @@
                 >{isAllPaused ? "Start All" : "Pause All"}</button
             >
             <button
+                translate="no"
                 class="icon-btn"
                 type="button"
                 id="toggle-theme"
