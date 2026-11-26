@@ -36,7 +36,7 @@ export function filterServices(list: Service[], filter: Filters, sort: Sorts, qu
                 if (filter === 'all' || filter === 'disabled') return true
             }
 
-
+            
         }
     }).sort((a, b) => {
         const aStatus = a.enabled ? a.checks[a.checks.length - 1]?.status ?? 'unknown' : 'disabled'

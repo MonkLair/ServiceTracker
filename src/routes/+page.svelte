@@ -41,6 +41,7 @@
         e.preventDefault();
         isOpen = false;
     };
+
 </script>
 
 <section class="dashboard" data-route="dashboard">
@@ -121,7 +122,6 @@
             >
         </div>
     </div>
-
     <div class="cards">
         {#each filteredList as service (service.id)}
             <ServiceCard {service} />
@@ -156,9 +156,7 @@
         <div class="empty-state">
             <div class="empty-state_icon">📈</div>
             <h2 class="empty-state_title">Сервисы не найдены</h2>
-            <p class="empty-state_text">
-                Добавьте новый или измените фильтры.
-            </p>
+            <p class="empty-state_text">Добавьте новый или измените фильтры.</p>
         </div>
     {/if}
 </section>

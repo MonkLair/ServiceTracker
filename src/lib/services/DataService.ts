@@ -2,7 +2,7 @@ import { SEED_KEY } from "#lib/config/consts.ts"
 import type { ServiceStatus } from "#lib/models/Check.ts"
 import type { Service, ShortService } from "#lib/models/Service.ts"
 import { delay } from "#lib/utils/delay.ts"
-import { getFromStorage} from "#lib/utils/getFromStorage.ts"
+import { getFromStorage } from "#lib/utils/getFromStorage.ts"
 
 export class DataService {
     static async fetchAllServices(): Promise<Service[]> {
@@ -14,7 +14,7 @@ export class DataService {
 
         newList.forEach(s => s.enabled = enabled)
 
-        localStorage.setItem(SEED_KEY, JSON.stringify(newList))
+        this.persist(newList)
         return newList
     }
 
@@ -24,7 +24,7 @@ export class DataService {
         const idx = newList.findIndex(s => s.id === id)
         newList[idx].enabled = enabled
 
-        localStorage.setItem(SEED_KEY, JSON.stringify(newList))
+        this.persist(newList)
         return newList
     }
 
@@ -34,7 +34,7 @@ export class DataService {
         const idx = newList.findIndex(s => s.id === id)
         const deletedService = newList.splice(idx, 1)
 
-        localStorage.setItem(SEED_KEY, JSON.stringify(newList))
+        this.persist(newList)
         return newList
     }
 
@@ -44,7 +44,7 @@ export class DataService {
         const idx = newList.findIndex(s => s.id === id)
         newList[idx].checks = []
 
-        localStorage.setItem(SEED_KEY, JSON.stringify(newList))
+        this.persist(newList)
         return newList
     }
 
@@ -58,7 +58,7 @@ export class DataService {
         const check = {
             httpStatus,
             responseMs: Math.round(r),
-            id,
+            id: crypto.randomUUID(),
             status,
             ts: now,
         }
@@ -66,7 +66,7 @@ export class DataService {
 
         const idx = newList.findIndex(s => s.id === id)
         newList[idx].checks.push(check)
-        localStorage.setItem(SEED_KEY, JSON.stringify(newList))
+        this.persist(newList)
 
         return newList
     }
@@ -89,8 +89,19 @@ export class DataService {
         }
         newList.push(newService)
 
-        localStorage.setItem(SEED_KEY, JSON.stringify(newList))
+        this.persist(newList)
         return newList
+    }
+
+    private static persist(list: Service[]) {
+        const seen = new Set<string>()
+        const unique = list.filter(s => {
+            if (seen.has(s.id)) return false
+            seen.add(s.id)
+            return true
+        })
+        localStorage.setItem(SEED_KEY, JSON.stringify(unique))
+        return unique
     }
 
     static async editService(editedService: Service) {
@@ -103,12 +114,12 @@ export class DataService {
             ...editedService,
             updatedAt: new Date().toISOString()
         }
-        localStorage.setItem(SEED_KEY, JSON.stringify(newList))
+        this.persist(newList)
         return newList
     }
 
     static async deleteAllServices() {
-        localStorage.setItem(SEED_KEY, JSON.stringify([]))
+        this.persist([])
         return []
     }
 
