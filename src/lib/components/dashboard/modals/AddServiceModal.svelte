@@ -15,6 +15,7 @@
     let error: string[] = $state([]);
 
     async function handleSubmit(e: MouseEvent) {
+        error = []
         if (newServiceData.name.trim().length <= 2) error.push("nameError");
         if (newServiceData.url.trim().length < 7) error.push("urlError");
         if (serviceStore.serviceList.map((s) => s.url === newServiceData.url.trim(),).includes(true)) error.push("alreadyExist");
